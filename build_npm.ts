@@ -13,7 +13,9 @@ await build({
   outDir: "./npm",
   shims: {
     // Add shims as necessary for your project
-    deno: true,
+    deno: {
+      test: "dev",
+    },
     custom: [
       {
         package: {
@@ -26,25 +28,26 @@ await build({
   },
   package: {
     // Update with your package details
-    name: "s3-lite-client",
+    name: "@capgo/s3-lite-client",
     version: version,
     description: "This is a lightweight S3 client for Node.js and Deno.",
     license: "MIT",
     repository: {
       type: "git",
-      url: "git+https://github.com/bradenmacdonald/deno-s3-lite-client.git",
+      url: "git+https://github.com/riderx/deno-s3-lite-client.git",
     },
     bugs: {
-      url: "https://github.com/bradenmacdonald/deno-s3-lite-client/issues",
+      url: "https://github.com/riderx/deno-s3-lite-client/issues",
     },
     engines: {
       "node": ">=16"
     },
     author: {
-      "name": "Braden MacDonald",
-      "url": "https://github.com/bradenmacdonald"
+      "name": "Martin Donadieu",
+      "url": "https://martin.solos.ventures/d"
     },
     contributors: [
+      "Braden MacDonald <martindonadieu@gmail.com> (https://github.com/bradenmacdonald/)",
       "Martin Donadieu <martindonadieu@gmail.com> (https://martin.solos.ventures/)",
     ],
     keywords: [
