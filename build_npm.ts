@@ -11,16 +11,25 @@ await emptyDir("./npm");
 await build({
   entryPoints: ["./mod.ts"], // Replace with your actual entry point
   outDir: "./npm",
+  testPattern: "**/*(*.test|integration).{ts,tsx,js,mjs,jsx}",
+  // Filter when we use node stream package
+  filterDiagnostic(diagnostic) {
+    if (
+      diagnostic.messageText.startsWith("Property 'from' does not exist on type '{ new (underlyingSource: UnderlyingByteSource, strategy?: QueuingStrategy<Uint8Array> | undefined): ReadableStream")
+    ) {
+      return false; // ignore all diagnostics For ReadableStream.from in this file
+    }
+    return true;
+  },
   shims: {
-    // Add shims as necessary for your project
+    undici: true, // fix: can copy a file test integration
     deno: {
       test: "dev",
     },
     custom: [
       {
         package: {
-          name: "web-streams-polyfill",
-          version: "^3.1.1",
+          name: "node:stream/web",
         },
         globalNames: ["ReadableStream", "WritableStream", "TransformStream"],
       },
@@ -40,7 +49,7 @@ await build({
       url: "https://github.com/riderx/deno-s3-lite-client/issues",
     },
     engines: {
-      "node": ">=16"
+      "node": ">=16",
     },
     author: {
       "name": "Martin Donadieu",
@@ -57,8 +66,8 @@ await build({
       "minio",
       "cloud",
       "s3",
-      "storage"
-    ]
+      "storage",
+    ],
   },
   postBuild() {
     // Copy additional files to the npm directory if needed
