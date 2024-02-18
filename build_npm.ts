@@ -42,7 +42,7 @@ await build({
     },
     author: {
       "name": "Martin Donadieu",
-      "url": "https://martin.solos.ventures/d"
+      "url": "https://martin.solos.ventures/d",
     },
     contributors: [
       "Braden MacDonald <martindonadieu@gmail.com> (https://github.com/bradenmacdonald/)",
