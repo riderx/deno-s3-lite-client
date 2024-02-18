@@ -16,14 +16,14 @@ await build({
     deno: {
       test: "dev",
     },
-    custom: [
-      {
-        package: {
-          name: "node:stream/web",
-        },
-        globalNames: ["ReadableStream", "WritableStream", "TransformStream"],
-      },
-    ],
+  },
+  compilerOptions: {
+    lib: ["ESNext", "DOM"],
+  },
+  mappings: {
+    "node:stream/web": {
+      name: "node:stream/web",
+    },
   },
   package: {
     name: "@capgo/s3-lite-client",
@@ -68,4 +68,4 @@ await build({
   },
 });
 
-console.log("Build complete. Run `cd npm && npm publish`.");
+console.log("Build complete. Run `cd npm && npm publish && cd ..`.");
